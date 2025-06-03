@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chhorn Ponleu - Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'monospace'],
+                        'sans': ['Inter', 'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    colors: {
+                        'dev': {
+                            'bg': '#0a0a0a',
+                            'card': '#111111',
+                            'border': '#222222',
+                            'accent': '#00ff88',
+                            'secondary': '#ff6b6b',
+                            'warning': '#ffd93d',
+                            'info': '#6bcf7f',
+                            'syntax': {
+                                'keyword': '#ff79c6',
+                                'string': '#f1fa8c',
+                                'function': '#8be9fd',
+                                'variable': '#50fa7b',
+                                'comment': '#6272a4'
+                            }
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fadeInUp': 'fadeInUp 0.8s ease-out',
+                        'typing': 'typing 3.5s steps(40, end), blink-caret .75s step-end infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        typing: {
+                            'from': { width: '0' },
+                            'to': { width: '100%' }
+                        },
+                        'blink-caret': {
+                            'from, to': { 'border-color': 'transparent' },
+                            '50%': { 'border-color': '#00ff88' }
+                        },
+                        glow: {
+                            'from': { 'box-shadow': '0 0 5px #00ff88, 0 0 10px #00ff88, 0 0 15px #00ff88' },
+                            'to': { 'box-shadow': '0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 30px #00ff88' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dev-bg font-sans text-green-400 min-h-screen relative">
+    <!-- Animated Background Effects -->
+    <div class="stars" id="stars"></div>
+    <div class="snowflakes" id="snowflakes"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dev-bg/90 backdrop-blur-md border-b border-dev-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-mono font-bold text-dev-accent">
+                    <span class="hidden lg:inline">
+                        <span class="text-dev-syntax-keyword">const</span> 
+                        <span class="text-dev-accent">dev</span> = 
+                        <span class="text-dev-syntax-string">"Chhorn Ponleu"</span>
+                    </span>
+                    <span class="lg:hidden text-dev-syntax-string">{Chhorn Ponleu}</span>
+                </div>
+                <div class="hidden md:flex space-x-8 font-mono items-center">
+                    <a href="#home" class="text-dev-syntax-comment hover:text-dev-accent transition-colors duration-300"># home</a>
+                    <a href="#skills" class="text-dev-syntax-comment hover:text-dev-accent transition-colors duration-300"># skills</a>
+                    <a href="#contact" class="text-dev-syntax-comment hover:text-dev-accent transition-colors duration-300"># contact</a>
+                    
+                    <!-- Theme Toggle -->
+                    <div class="relative">
+                        <button id="theme-toggle" class="flex items-center space-x-2 text-dev-syntax-comment hover:text-dev-accent transition-colors duration-300 px-3 py-1 rounded-lg border border-dev-border hover:border-dev-accent">
+                            <i id="theme-icon" class="fas fa-moon text-sm"></i>
+                            <span id="theme-text" class="text-xs">dark</span>
+                        </button>
+                        
+                        <!-- Theme Dropdown -->
+                        <div id="theme-dropdown" class="hidden absolute right-0 top-full mt-2 bg-dev-card border border-dev-border rounded-lg shadow-2xl min-w-[120px] z-50">
+                            <button data-theme="dark" class="w-full text-left px-4 py-2 text-sm font-mono text-dev-syntax-comment hover:text-dev-accent hover:bg-dev-border transition-colors duration-200 rounded-t-lg flex items-center space-x-2">
+                                <i class="fas fa-moon text-xs"></i>
+                                <span>dark</span>
+                            </button>
+                            <button data-theme="light" class="w-full text-left px-4 py-2 text-sm font-mono text-dev-syntax-comment hover:text-dev-accent hover:bg-dev-border transition-colors duration-200 flex items-center space-x-2">
+                                <i class="fas fa-sun text-xs"></i>
+                                <span>light</span>
+                            </button>
+                            <button data-theme="system" class="w-full text-left px-4 py-2 text-sm font-mono text-dev-syntax-comment hover:text-dev-accent hover:bg-dev-border transition-colors duration-200 rounded-b-lg flex items-center space-x-2">
+                                <i class="fas fa-desktop text-xs"></i>
+                                <span>system</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:hidden flex items-center space-x-4">
+                    <!-- Mobile Theme Toggle -->
+                    <div class="relative">
+                        <button id="mobile-theme-toggle" class="flex items-center space-x-2 text-dev-accent hover:text-dev-syntax-function px-2 py-1 rounded-lg border border-dev-border hover:border-dev-accent">
+                            <i id="mobile-theme-icon" class="fas fa-moon text-sm"></i>
+                            <span id="mobile-theme-text" class="text-xs">dark</span>
+                        </button>
+                        
+                        <!-- Mobile Theme Dropdown -->
+                        <div id="mobile-theme-dropdown" class="hidden absolute right-0 top-full mt-2 bg-dev-card border border-dev-border rounded-lg shadow-2xl min-w-[120px] z-50">
+                            <button data-theme="dark" class="w-full text-left px-4 py-2 text-sm font-mono text-dev-syntax-comment hover:text-dev-accent hover:bg-dev-border transition-colors duration-200 rounded-t-lg flex items-center space-x-2">
+                                <i class="fas fa-moon text-xs"></i>
+                                <span>dark</span>
+                            </button>
+                            <button data-theme="light" class="w-full text-left px-4 py-2 text-sm font-mono text-dev-syntax-comment hover:text-dev-accent hover:bg-dev-border transition-colors duration-200 flex items-center space-x-2">
+                                <i class="fas fa-sun text-xs"></i>
+                                <span>light</span>
+                            </button>
+                            <button data-theme="system" class="w-full text-left px-4 py-2 text-sm font-mono text-dev-syntax-comment hover:text-dev-accent hover:bg-dev-border transition-colors duration-200 rounded-b-lg flex items-center space-x-2">
+                                <i class="fas fa-desktop text-xs"></i>
+                                <span>system</span>
+                            </button>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-btn" class="text-dev-accent hover:text-dev-syntax-function">
+                        <i class="fas fa-terminal text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dev-card backdrop-blur-md border-b border-dev-border">
+            <div class="px-4 py-4 space-y-4 font-mono">
+                <a href="#home" class="block text-dev-syntax-comment hover:text-dev-accent transition-colors duration-300"># home</a>
+                <a href="#skills" class="block text-dev-syntax-comment hover:text-dev-accent transition-colors duration-300"># skills</a>
+                <a href="#contact" class="block text-dev-syntax-comment hover:text-dev-accent transition-colors duration-300"># contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 z-10">
+        <!-- Code-like background pattern -->
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-20 left-10 font-mono text-xs text-dev-syntax-comment">
+                // Building innovative solutions<br/>
+                function createAwesome() {<br/>
+                &nbsp;&nbsp;return dedication + creativity;<br/>
+                }
+            </div>
+            <div class="absolute bottom-32 right-10 font-mono text-xs text-dev-syntax-comment">
+                const skills = [<br/>
+                &nbsp;&nbsp;'JavaScript', 'React',<br/>
+                &nbsp;&nbsp;'Node.js', 'Java'<br/>
+                ];
+            </div>
+        </div>
+        
+        <div class="z-10 max-w-7xl mx-auto px-4">
+            <div class="animate-fadeInUp">
+                <!-- Terminal-style header -->
+                <div class="bg-dev-card border border-dev-border rounded-lg p-6 mb-8 shadow-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        </div>
+                        <div class="ml-4 font-mono text-sm text-dev-syntax-comment">terminal</div>
+                    </div>
+                    <div class="text-left font-mono text-sm">
+                        <div class="text-dev-syntax-comment">$ whoami</div>
+                        <div class="text-dev-accent text-2xl md:text-4xl font-bold mb-2">Chhorn Ponleu</div>
+                        <div class="text-dev-syntax-comment">$ cat role.txt</div>
+                        <div class="text-dev-syntax-function text-xl md:text-2xl mb-2">Full Stack Developer</div>
+                        <div class="text-dev-syntax-comment">$ echo $PASSION</div>
+                        <div class="text-dev-syntax-string">"Building scalable mobile and web applications with modern tech stack"</div>
+                    </div>
+                </div>
+                
+                <p class="text-lg md:text-xl text-dev-syntax-comment mb-12 max-w-4xl mx-auto leading-relaxed font-mono">
+                    <span class="text-dev-syntax-keyword">// </span>Passionate about crafting clean code and innovative solutions<br/>
+                    <span class="text-dev-syntax-keyword">// </span>Specializing in Node.js, Java, React ecosystem
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center font-mono">
+                    <a href="#skills" class="bg-dev-accent text-dev-bg hover:bg-dev-syntax-function px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg animate-glow">
+                        cat skills.json
+                    </a>
+                    <a href="#contact" class="border border-dev-accent text-dev-accent hover:bg-dev-accent/10 px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                        ./contact.sh
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 bg-dev-card/30 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-mono font-bold mb-16 text-dev-accent">
+                <!-- <span class="text-dev-syntax-comment">// </span> -->
+                Tech_Stack.json
+            </h2>
+            
+            <!-- Frontend Stack -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-mono font-semibold mb-8 text-dev-syntax-function">
+                    <span class="text-dev-syntax-string">"frontend"</span>: [
+                </h3>
+                <div class="flex flex-col md:grid md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 pl-8">
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <i class="fab fa-react text-2xl md:text-4xl text-[#61dafb] flex-shrink-0"></i>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">React.js</h4>
+                        </div>
+                    </div>
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <i class="fab fa-react text-2xl md:text-4xl text-[#61dafb] flex-shrink-0"></i>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">React Native</h4>
+                        </div>
+                    </div>
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-mobile-alt text-2xl md:text-4xl text-dev-accent flex-shrink-0"></i>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">Expo</h4>
+                        </div>
+                    </div>
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <div class="nextjs-icon text-2xl md:text-4xl flex-shrink-0 font-bold text-white bg-black rounded-full w-8 h-8 md:w-12 md:h-12 flex items-center justify-center">N</div>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">Next.js</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-2xl font-mono text-dev-syntax-function mt-4">],</div>
+            </div>
+
+            <!-- Backend Stack -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-mono font-semibold mb-8 text-dev-syntax-function">
+                    <span class="text-dev-syntax-string">"backend"</span>: [
+                </h3>
+                <div class="flex flex-col md:grid md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 pl-8">
+                    
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-server text-2xl md:text-4xl text-dev-syntax-variable flex-shrink-0"></i>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">Express.js</h4>
+                        </div>
+                    </div>
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-cat text-2xl md:text-4xl text-[#e0234e] flex-shrink-0"></i>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">NestJS</h4>
+                        </div>
+                    </div>
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-fire text-2xl md:text-4xl text-[#ff6600] flex-shrink-0"></i>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">Hono</h4>
+                        </div>
+                    </div>
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-leaf text-2xl md:text-4xl text-[#6db33f] flex-shrink-0"></i>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">Spring</h4>
+                        </div>
+                    </div>
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-database text-2xl md:text-4xl text-dev-syntax-variable flex-shrink-0"></i>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">SQL & NoSQL</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-2xl font-mono text-dev-syntax-function mt-4">],</div>
+            </div>
+
+            <!-- Cloud & Deployment Stack -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-mono font-semibold mb-8 text-dev-syntax-function">
+                    <span class="text-dev-syntax-string">"deployment"</span>: [
+                </h3>
+                <div class="flex flex-col md:grid md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 pl-8">
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-rocket text-2xl md:text-4xl text-dev-syntax-variable flex-shrink-0"></i>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">Vercel</h4>
+                        </div>
+                    </div>
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-cloud text-2xl md:text-4xl text-[#f38020] flex-shrink-0"></i>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">Cloudflare</h4>
+                        </div>
+                    </div>
+                    <div class="bg-dev-card border border-dev-border p-4 md:p-6 rounded-xl flex items-center md:flex-col md:text-center gap-4 md:gap-0 hover:border-dev-accent transition-all duration-300 transform hover:scale-105">
+                        <i class="fab fa-aws text-2xl md:text-4xl text-[#ff9900] flex-shrink-0"></i>
+                        <div class="md:mt-4">
+                            <h4 class="font-mono font-semibold text-dev-accent text-sm md:text-base">AWS</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-2xl font-mono text-dev-syntax-function mt-4">]</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-mono font-bold mb-8 text-dev-accent">
+                <!-- <span class="text-dev-syntax-comment">// </span> -->
+                Contact.init()
+            </h2>
+            <p class="text-xl font-mono text-dev-syntax-comment mb-12">
+                <span class="text-dev-syntax-keyword">/*</span> Let's build something awesome together!<span class="text-dev-syntax-keyword">*/</span>
+            </p>
+            
+            <div class="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 max-w-4xl mx-auto mb-12">
+                <a href="mailto:chhornponleu@email.com" class="bg-dev-card border border-dev-border p-4 rounded-xl hover:border-dev-accent transition-all duration-300 transform hover:scale-105 cursor-pointer flex items-center gap-4 text-left">
+                    <i class="fas fa-envelope text-2xl text-dev-accent"></i>
+                    <div>
+                        <h3 class="font-mono font-semibold text-dev-syntax-function text-sm">sendEmail()</h3>
+                        <p class="font-mono text-xs text-dev-syntax-string">"email"</p>
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/in/chhorn-ponleu" target="_blank" rel="noopener noreferrer" class="bg-dev-card border border-dev-border p-4 rounded-xl hover:border-dev-accent transition-all duration-300 transform hover:scale-105 cursor-pointer flex items-center gap-4 text-left">
+                    <i class="fab fa-linkedin text-2xl text-[#0077b5]"></i>
+                    <div>
+                        <h3 class="font-mono font-semibold text-dev-syntax-function text-sm">connectLinkedIn()</h3>
+                        <p class="font-mono text-xs text-dev-syntax-string">"professional"</p>
+                    </div>
+                </a>
+                <a href="https://github.com/chhornponleu" target="_blank" rel="noopener noreferrer" class="bg-dev-card border border-dev-border p-4 rounded-xl hover:border-dev-accent transition-all duration-300 transform hover:scale-105 cursor-pointer flex items-center gap-4 text-left">
+                    <i class="fab fa-github text-2xl text-dev-accent"></i>
+                    <div>
+                        <h3 class="font-mono font-semibold text-dev-syntax-function text-sm">checkGitHub()</h3>
+                        <p class="font-mono text-xs text-dev-syntax-string">"repositories"</p>
+                    </div>
+                </a>
+                <a href="https://www.youtube.com/@codewithponleu" target="_blank" rel="noopener noreferrer" class="bg-dev-card border border-dev-border p-4 rounded-xl hover:border-dev-accent transition-all duration-300 transform hover:scale-105 cursor-pointer flex items-center gap-4 text-left">
+                    <i class="fab fa-youtube text-2xl text-[#ff0000]"></i>
+                    <div>
+                        <h3 class="font-mono font-semibold text-dev-syntax-function text-sm">watchTutorials()</h3>
+                        <p class="font-mono text-xs text-dev-syntax-string">"coding_videos"</p>
+                    </div>
+                </a>
+                <a href="https://x.com/chhornponleu" target="_blank" rel="noopener noreferrer" class="bg-dev-card border border-dev-border p-4 rounded-xl hover:border-dev-accent transition-all duration-300 transform hover:scale-105 cursor-pointer flex items-center gap-4 text-left">
+                    <i class="fab fa-x-twitter text-2xl text-white" style="font-family: 'Font Awesome 6 Brands';"></i>
+                    <div>
+                        <h3 class="font-mono font-semibold text-dev-syntax-function text-sm">followOnX()</h3>
+                        <p class="font-mono text-xs text-dev-syntax-string">"dev_thoughts"</p>
+                    </div>
+                </a>
+                <a href="https://www.facebook.com/chhornponleu" target="_blank" rel="noopener noreferrer" class="bg-dev-card border border-dev-border p-4 rounded-xl hover:border-dev-accent transition-all duration-300 transform hover:scale-105 cursor-pointer flex items-center gap-4 text-left">
+                    <i class="fab fa-facebook text-2xl text-[#1877f2]"></i>
+                    <div>
+                        <h3 class="font-mono font-semibold text-dev-syntax-function text-sm">connectFacebook()</h3>
+                        <p class="font-mono text-xs text-dev-syntax-string">"social_network"</p>
+                    </div>
+                </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center border-t border-dev-border">
+        <p class="font-mono text-dev-syntax-comment">
+            <span class="text-dev-syntax-keyword">// </span>© 2025 Chhorn Ponleu | Built with <span class="text-dev-accent">❤️</span> and lots of <span class="text-dev-syntax-function">coffee</span>
+        </p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

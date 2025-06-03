@@ -1,0 +1,178 @@
+/* Custom X icon fallback */
+.x-icon::before {
+    content: "𝕏";
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* Hide Font Awesome X icon if it doesn't load properly */
+.fa-x-twitter:not(.fa)::before {
+    content: "𝕏";
+    font-family: inherit !important;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Light theme variables */
+:root {
+    --dev-bg: #0a0a0a;
+    --dev-card: #111111;
+    --dev-border: #222222;
+    --dev-accent: #00ff88;
+    --dev-text: #10b981;
+    --dev-syntax-keyword: #ff79c6;
+    --dev-syntax-string: #f1fa8c;
+    --dev-syntax-function: #8be9fd;
+    --dev-syntax-variable: #50fa7b;
+    --dev-syntax-comment: #6272a4;
+}
+
+[data-theme="light"] {
+    --dev-bg: #ffffff;
+    --dev-card: #f8f9fa;
+    --dev-border: #e9ecef;
+    --dev-accent: #00a86b;
+    --dev-text: #1f2937;
+    --dev-syntax-keyword: #d73a49;
+    --dev-syntax-string: #032f62;
+    --dev-syntax-function: #6f42c1;
+    --dev-syntax-variable: #22863a;
+    --dev-syntax-comment: #6a737d;
+}
+
+/* Apply CSS variables to classes */
+.bg-dev-bg { background-color: var(--dev-bg) !important; }
+.bg-dev-card { background-color: var(--dev-card) !important; }
+.border-dev-border { border-color: var(--dev-border) !important; }
+.text-dev-accent { color: var(--dev-accent) !important; }
+.text-green-400 { color: var(--dev-text) !important; }
+.text-dev-syntax-keyword { color: var(--dev-syntax-keyword) !important; }
+.text-dev-syntax-string { color: var(--dev-syntax-string) !important; }
+.text-dev-syntax-function { color: var(--dev-syntax-function) !important; }
+.text-dev-syntax-variable { color: var(--dev-syntax-variable) !important; }
+.text-dev-syntax-comment { color: var(--dev-syntax-comment) !important; }
+.bg-dev-accent { background-color: var(--dev-accent) !important; }
+.hover\:bg-dev-accent:hover { background-color: var(--dev-accent) !important; }
+.hover\:border-dev-accent:hover { border-color: var(--dev-accent) !important; }
+
+/* Light theme specific overrides */
+[data-theme="light"] .text-white { color: #1f2937 !important; }
+[data-theme="light"] .bg-dev-bg\/90 { background-color: rgba(255, 255, 255, 0.9) !important; }
+[data-theme="light"] .bg-dev-bg\/95 { background-color: rgba(255, 255, 255, 0.95) !important; }
+[data-theme="light"] .bg-dev-card\/30 { background-color: rgba(248, 249, 250, 0.3) !important; }
+[data-theme="light"] .text-dev-bg { color: #ffffff !important; }
+[data-theme="light"] .hover\:bg-dev-syntax-function:hover { background-color: #6f42c1 !important; }
+[data-theme="light"] .animate-glow { 
+    box-shadow: 0 0 5px #00a86b, 0 0 10px #00a86b, 0 0 15px #00a86b !important;
+}
+[data-theme="light"] .nextjs-icon { 
+    background-color: #ffffff !important; 
+    color: #000000 !important; 
+    border: 2px solid #e5e7eb !important;
+}
+
+/* Theme transition */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Animated Background Effects */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    display: block;
+}
+
+.star {
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: #ffffff;
+    font-size: 10px;
+    animation: sparkle 3s infinite ease-in-out;
+    text-shadow: 0 0 2px #ffffff;
+}
+
+.star::before {
+    content: "★";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    color: inherit;
+    text-shadow: inherit;
+}
+
+.star:nth-child(3n) {
+    color: #87ceeb;
+    text-shadow: 0 0 2px #87ceeb;
+}
+
+.star:nth-child(3n+1) {
+    color: #fffacd;
+    text-shadow: 0 0 2px #fffacd;
+}
+
+.snowflakes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    display: none;
+}
+
+[data-theme="light"] .snowflakes {
+    display: block;
+}
+
+[data-theme="light"] .stars {
+    display: none;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: #6b7280;
+    user-select: none;
+    pointer-events: none;
+    animation: snowfall linear infinite;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 0 2px rgba(107, 114, 128, 0.8);
+}
+
+@keyframes sparkle {
+    0%, 100% { 
+        opacity: 0; 
+        transform: scale(0.4) rotate(0deg);
+    }
+    25% {
+        opacity: 0.5;
+        transform: scale(0.7) rotate(90deg);
+    }
+    50% { 
+        opacity: 0.8; 
+        transform: scale(1) rotate(180deg);
+    }
+    75% {
+        opacity: 0.5;
+        transform: scale(0.7) rotate(270deg);
+    }
+}
+
+@keyframes snowfall {
+    from {
+        transform: translateY(-100vh) rotate(0deg);
+    }
+    to {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
